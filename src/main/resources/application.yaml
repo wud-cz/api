@@ -1,0 +1,10 @@
+micronaut:
+  server:
+    port: 8082
+    cors:
+      enabled: true
+      web:
+        allowedOrigins:
+          - https://2020.wud.cz
+path:
+  registrace: /var/data/wud.cz/2020/registrace.txt

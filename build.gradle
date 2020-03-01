@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'cz.wud'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor(
+            platform("io.micronaut:micronaut-bom:$micronautVersion"),
+            "io.micronaut:micronaut-inject-java",
+            "io.micronaut:micronaut-validation",
+    )
+    implementation(
+            platform("io.micronaut:micronaut-bom:$micronautVersion"),
+            "io.micronaut:micronaut-inject",
+            "io.micronaut:micronaut-validation",
+            "io.micronaut:micronaut-runtime",
+            "javax.annotation:javax.annotation-api",
+            "io.micronaut:micronaut-http-server-netty",
+    )
+
+    runtimeOnly(
+            "ch.qos.logback:logback-classic:1.2.3",
+    )
+
+    testAnnotationProcessor(
+            platform("io.micronaut:micronaut-bom:$micronautVersion"),
+            "io.micronaut:micronaut-inject-java",
+    )
+
+    testImplementation(
+            platform("io.micronaut:micronaut-bom:$micronautVersion"),
+            "org.junit.jupiter:junit-jupiter-api",
+            "io.micronaut.test:micronaut-test-junit5",
+
+    )
+    testRuntimeOnly(
+            "org.junit.jupiter:junit-jupiter-engine",
+    )
+}
+application {
+    mainClassName = 'cz.wud.api.Application'
+}
+
+test {
+    useJUnitPlatform()
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.compilerArgs.add('-parameters')
+}
